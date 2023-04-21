@@ -1,11 +1,11 @@
 import { FC, useState } from "react";
 import Button from "../../components/ui/Button";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
-interface pageProps {}
-
-const Page: FC<pageProps> = ({}) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  return <Button isLoading={isLoading}>Submit</Button>;
+const Page = async ({}) => {
+  const session = await getServerSession(authOptions);
+  return <pre>{JSON.stringify(session)}</pre>;
 };
 
 export default Page;

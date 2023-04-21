@@ -1,5 +1,11 @@
 import { db } from "@/lib/db";
+import Button from "@/components/ui/Button";
+
 export default async function Home() {
   await db.set("hello", "tumanhnguyen");
-  return <main className="">say something</main>;
+  return (
+    <Button className="mt-[20px] ml-[20px]" variant="default" size="lg">
+      Hello
+    </Button>
+  );
 }
