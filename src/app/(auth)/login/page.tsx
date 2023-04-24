@@ -1,7 +1,7 @@
 "use client";
 import { FC } from "react";
 import { useState } from "react";
-import Button from "../../components/ui/Button";
+import Button from "../../../components/ui/Button";
 import GoogleLogo from "../../../public/icons/googleLogo.svg";
 import Logo from "../../../public/icons/livechat-vector-logo.svg";
 import { toast } from "react-hot-toast";
