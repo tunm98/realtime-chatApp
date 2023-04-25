@@ -2,8 +2,8 @@
 import { FC } from "react";
 import { useState } from "react";
 import Button from "../../../components/ui/Button";
-import GoogleLogo from "../../../public/icons/googleLogo.svg";
-import Logo from "../../../public/icons/livechat-vector-logo.svg";
+import GoogleLogo from "../../../../public/icons/googleLogo.svg";
+import Logo from "../../../../public/icons/livechat-vector-logo.svg";
 import { toast } from "react-hot-toast";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
