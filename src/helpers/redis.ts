@@ -8,6 +8,19 @@ export async function fetchRedis(
   ...args: string[] | number[]
 ) {
   const commandUrl = `${upstashRedisRestUrl}/${command}/${args.join("/")}`;
+  const RESTResponse = await fetch(commandUrl, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+    cache: "no-store",
+  });
+  if (!RESTResponse.ok) {
+    throw new Error(
+      `Error executing Redis command: ${RESTResponse.statusText}`
+    );
+  }
+  const data = await RESTResponse.json();
+  console.log("🚀 ~ file: redis.ts:23 ~ data:", data.result);
 
-  return true;
+  return data.result;
 }

@@ -5,7 +5,6 @@ import { authOptions } from "@/lib/auth";
 import Link from "next/link";
 const Page = async ({}) => {
   const session = await getServerSession(authOptions);
-  // return
   return (
     <>
       <pre>{JSON.stringify(session)}</pre>;<pre>{JSON.stringify(session)}</pre>

@@ -12,6 +12,7 @@ type FormData = z.infer<typeof addFriendValidator>;
 
 const AddfriendButton: FC<AddfriendButtonProps> = ({}) => {
   const [isSuccess, setIsSuccess] = useState(false);
+  console.log("🚀 ~ file: AddfriendButton.tsx:15 ~ isSuccess:", isSuccess);
   const {
     register,
     handleSubmit,
@@ -32,12 +33,11 @@ const AddfriendButton: FC<AddfriendButtonProps> = ({}) => {
         setError("email", { message: error.message });
         return;
       }
-
       if (error instanceof AxiosError) {
-        setError("email", { message: error.message });
+        console.log(error);
+        setError("email", { message: error.response?.data });
         return;
       }
-
       setError("email", { message: "Something went wrong." });
     }
   };
