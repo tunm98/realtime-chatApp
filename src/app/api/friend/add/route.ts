@@ -13,7 +13,6 @@ export async function POST(request: Request) {
       "get",
       `user:email:${emailToAdd}`
     )) as string;
-    console.log("🚀 ~ file: route.ts:16 ~ POST ~ idToAdd:", !idToAdd);
 
     if (!idToAdd) {
       return new Response("This person does not exist.", { status: 400 });
@@ -32,10 +31,6 @@ export async function POST(request: Request) {
       `user:${idToAdd}:incoming_request`,
       session.user.id
     )) as 0 | 1;
-    console.log(
-      "🚀 ~ file: route.ts:35 ~ POST ~ isAlreadyAdded:",
-      isAlreadyAdded
-    );
 
     if (isAlreadyAdded) {
       return new Response("already add this user", { status: 400 });

@@ -1,6 +1,6 @@
 import Providers from "@/components/Providers";
 import "./globals.css";
-
+import { Icons } from "../../public/icons/Icons";
 export const metadata = {
   title: "Realtime App",
   description: "Realtime App",
@@ -16,7 +16,9 @@ export default function RootLayout({
       <head>
         <link
           rel="shortcut icon"
-          href="https://livechat.design/images/livechat/DIGITAL%20%28RGB%29/PNG/Mark_RGB_Orange.png"
+          href={
+            "https://livechat.design/images/livechat/DIGITAL%20%28RGB%29/PNG/Mark_RGB_Orange.png"
+          }
         />
       </head>
       <body>
