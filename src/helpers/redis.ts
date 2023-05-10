@@ -20,7 +20,6 @@ export async function fetchRedis(
     );
   }
   const data = await RESTResponse.json();
-  console.log("🚀 ~ file: redis.ts:23 ~ data:", data.result);
 
   return data.result;
 }

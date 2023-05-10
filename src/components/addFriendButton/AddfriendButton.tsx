@@ -12,7 +12,6 @@ type FormData = z.infer<typeof addFriendValidator>;
 
 const AddfriendButton: FC<AddfriendButtonProps> = ({}) => {
   const [isSuccess, setIsSuccess] = useState(false);
-  console.log("🚀 ~ file: AddfriendButton.tsx:15 ~ isSuccess:", isSuccess);
   const {
     register,
     handleSubmit,

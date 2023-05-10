@@ -6,14 +6,14 @@ import Link from "next/link";
 const Page = async ({}) => {
   const session = await getServerSession(authOptions);
   return (
-    <>
+    <div className="flex flex-col">
       <pre>{JSON.stringify(session)}</pre>;<pre>{JSON.stringify(session)}</pre>
       <Link href="/dashboard/add">
         <Button className="mt-[20px] ml-[20px]" variant="default" size="lg">
           Go to Addfr page
         </Button>
       </Link>
-    </>
+    </div>
   );
 };
 

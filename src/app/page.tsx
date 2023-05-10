@@ -42,6 +42,7 @@ export default function Home({ posts }: PageProps) {
           Go to Login
         </Button>
       </Link>
+
       <ul>
         {posts?.map((post) => (
           <li key={post.id}>{post?.title}</li>
