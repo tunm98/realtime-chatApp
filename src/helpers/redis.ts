@@ -14,12 +14,13 @@ export async function fetchRedis(
     },
     cache: "no-store",
   });
+
   if (!RESTResponse.ok) {
     throw new Error(
       `Error executing Redis command: ${RESTResponse.statusText}`
     );
   }
   const data = await RESTResponse.json();
-
+  // console.log(data);
   return data.result;
 }

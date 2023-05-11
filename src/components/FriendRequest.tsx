@@ -1,8 +1,9 @@
 "use client";
-import { UserPlus, Check, X } from "lucide-react";
+import { UserPlus, Check, X, Loader2 } from "lucide-react";
 import { FC, useState } from "react";
 import Image from "next/image";
-
+import axios from "axios";
+import { useRouter } from "next/navigation";
 interface FriendRequestProps {
   sessionId: string;
   incomingFriendRequests?: incomingFriendRequest[];
@@ -12,8 +13,29 @@ const FriendRequest: FC<FriendRequestProps> = ({
   sessionId,
   incomingFriendRequests,
 }) => {
+  const router = useRouter();
+  // const [isLoading, setIsLoading] = useState(false);
+
   const [friendRequests, setFriendRequests] = useState(incomingFriendRequests);
-  console.log(friendRequests);
+  const acceptFriend = async (senderId: string) => {
+    // setIsLoading(true);
+    await axios.post("/api/friend/accept", { id: senderId });
+    // setIsLoading(false);
+    setFriendRequests((prev) =>
+      prev?.filter((request) => request.senderId !== senderId)
+    );
+    router.refresh();
+  };
+
+  const denyFriend = async (senderId: string) => {
+    // setIsLoading(true);
+    await axios.post("/api/friend/deny", { id: senderId });
+    // setIsLoading(false);
+    setFriendRequests((prev) =>
+      prev?.filter((request) => request.senderId !== senderId)
+    );
+    router.refresh();
+  };
   return (
     <div className="">
       {friendRequests && friendRequests.length > 0 ? (
@@ -43,15 +65,27 @@ const FriendRequest: FC<FriendRequestProps> = ({
             </div>
             <div className="flex gap-3 ml-auto">
               <button
+                onClick={() => acceptFriend(request.senderId)}
                 aria-label="accept friend"
-                className="w-7 h-7 bg-indigo-600 hover:bg-indigo-700 grid place-items-center rounded-full transition hover:shadow-md"
+                className="w-7 h-7 bg-indigo-600 hover:bg-indigo-700 flex justify-center items-center rounded-full transition hover:shadow-md"
               >
+                {/* {isLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin text-white" />
+                ) : (
+                  <Check className="font-semibold text-white w-3/4 h-3/4" />
+                )} */}
                 <Check className="font-semibold text-white w-3/4 h-3/4" />
               </button>
               <button
+                onClick={() => denyFriend(request.senderId)}
                 aria-label="deny friend"
                 className="w-7 h-7 bg-red-600 hover:bg-red-700 grid place-items-center rounded-full transition hover:shadow-md"
               >
+                {/* {isLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin text-white" />
+                ) : (
+                  <X className="font-semibold text-white w-3/4 h-3/4" />
+                )} */}
                 <X className="font-semibold text-white w-3/4 h-3/4" />
               </button>
             </div>
