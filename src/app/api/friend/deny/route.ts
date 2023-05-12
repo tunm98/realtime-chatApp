@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { fetchRedis } from "@/helpers/redis";
 import { z } from "zod";
+import { db } from "@/lib/db";
 
 export async function POST(request: Request) {
   try {
@@ -11,7 +12,7 @@ export async function POST(request: Request) {
       id: z.string(),
     });
 
-    const { id: idToAdd } = idDeny.parse(body);
+    const { id: idToDeny } = idDeny.parse(body);
 
     const session = await getServerSession(authOptions);
 
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
     const isAlreadyFriends = await fetchRedis(
       "sismember",
       `user:${session.user.id}:friends`,
-      idToAdd
+      idToDeny
     );
 
     if (isAlreadyFriends) {
@@ -32,12 +33,15 @@ export async function POST(request: Request) {
     const hasFriendRequest = await fetchRedis(
       "sismember",
       `user:${session.user.id}:incoming_friend_requests`,
-      idToAdd
+      idToDeny
     );
 
     if (!hasFriendRequest) {
       return new Response("No friend request", { status: 400 });
     }
+
+    await db.srem(`user:${session.user.id}:incoming_friend_requests`, idToDeny);
+    await db.srem(`user:${idToDeny}:incoming_friend_requests`, session.user.id);
 
     return new Response("OK");
   } catch (error) {

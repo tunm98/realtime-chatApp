@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { notFound } from "next/navigation";
@@ -6,8 +5,8 @@ import { Icon, Icons } from "../../../../public/icons/Icons";
 import Link from "next/link";
 import Image from "next/image";
 import SignOutButton from "@/components/SignOutButton";
-import FriendRequest from "@/components/FriendRequestSidebar";
 import { fetchRedis } from "@/helpers/redis";
+import FriendRequestSidebar from "@/components/FriendRequestSidebar";
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -65,7 +64,6 @@ const Layout = async ({ children }: LayoutProps) => {
                         <span className="text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white">
                           <Icon className="h-4 w-4" />
                         </span>
-
                         <span className="truncate">{option.name}</span>
                       </Link>
                     </li>
@@ -74,7 +72,7 @@ const Layout = async ({ children }: LayoutProps) => {
               </ul>
             </li>
             <li>
-              <FriendRequest
+              <FriendRequestSidebar
                 sessionId={session.user.id}
                 unseenRequests={unseenRequestNumber}
               />

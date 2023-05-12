@@ -20,6 +20,7 @@ const AddfriendButton: FC<AddfriendButtonProps> = ({}) => {
   } = useForm<FormData>({
     resolver: zodResolver(addFriendValidator),
   });
+
   const addFriend = async (email: string) => {
     try {
       const validator = addFriendValidator.parse({ email });

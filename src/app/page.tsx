@@ -28,8 +28,7 @@ export interface Post {
 export interface PageProps {
   posts: Post[];
 }
-export default function Home({ posts }: PageProps) {
-  // console.log("posts", posts);
+export default async function Home({ posts }: PageProps) {
   return (
     <>
       <Link href="/dashboard">

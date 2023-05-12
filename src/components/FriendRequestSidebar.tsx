@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Button from "./ui/Button";
 import Link from "next/link";
 import { User } from "lucide-react";
@@ -15,6 +15,11 @@ const FriendRequestSidebar: FC<FriendRequestProps> = ({
 }) => {
   const [unseenRequestNumber, setUnseenRequestNumber] =
     useState<number>(unseenRequests);
+
+  useEffect(() => {
+    setUnseenRequestNumber(unseenRequests);
+  }, [unseenRequests]);
+
   return (
     <Link
       href="/dashboard/requests"

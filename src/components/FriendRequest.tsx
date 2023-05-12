@@ -14,13 +14,10 @@ const FriendRequest: FC<FriendRequestProps> = ({
   incomingFriendRequests,
 }) => {
   const router = useRouter();
-  // const [isLoading, setIsLoading] = useState(false);
 
   const [friendRequests, setFriendRequests] = useState(incomingFriendRequests);
   const acceptFriend = async (senderId: string) => {
-    // setIsLoading(true);
     await axios.post("/api/friend/accept", { id: senderId });
-    // setIsLoading(false);
     setFriendRequests((prev) =>
       prev?.filter((request) => request.senderId !== senderId)
     );
@@ -28,9 +25,7 @@ const FriendRequest: FC<FriendRequestProps> = ({
   };
 
   const denyFriend = async (senderId: string) => {
-    // setIsLoading(true);
     await axios.post("/api/friend/deny", { id: senderId });
-    // setIsLoading(false);
     setFriendRequests((prev) =>
       prev?.filter((request) => request.senderId !== senderId)
     );
@@ -69,11 +64,6 @@ const FriendRequest: FC<FriendRequestProps> = ({
                 aria-label="accept friend"
                 className="w-7 h-7 bg-indigo-600 hover:bg-indigo-700 flex justify-center items-center rounded-full transition hover:shadow-md"
               >
-                {/* {isLoading ? (
-                  <Loader2 className="h-4 w-4 animate-spin text-white" />
-                ) : (
-                  <Check className="font-semibold text-white w-3/4 h-3/4" />
-                )} */}
                 <Check className="font-semibold text-white w-3/4 h-3/4" />
               </button>
               <button
@@ -81,11 +71,6 @@ const FriendRequest: FC<FriendRequestProps> = ({
                 aria-label="deny friend"
                 className="w-7 h-7 bg-red-600 hover:bg-red-700 grid place-items-center rounded-full transition hover:shadow-md"
               >
-                {/* {isLoading ? (
-                  <Loader2 className="h-4 w-4 animate-spin text-white" />
-                ) : (
-                  <X className="font-semibold text-white w-3/4 h-3/4" />
-                )} */}
                 <X className="font-semibold text-white w-3/4 h-3/4" />
               </button>
             </div>
