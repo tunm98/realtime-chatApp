@@ -7,6 +7,7 @@ import Image from "next/image";
 import SignOutButton from "@/components/SignOutButton";
 import { fetchRedis } from "@/helpers/redis";
 import FriendRequestSidebar from "@/components/FriendRequestSidebar";
+import { getUserById } from "@/helpers/get-user-by-id";
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -35,6 +36,11 @@ const Layout = async ({ children }: LayoutProps) => {
       `user:${session.user.id}:incoming_friend_requests`
     )) as string[]
   )?.length;
+  const friendList = await getUserById(session.user.id);
+  console.log(
+    "🚀 ~ file: layout.tsx:40 ~ Layout ~ friendList:",
+    friendList.length
+  );
 
   return (
     <div className="flex p-[50px] h-screen">
@@ -42,7 +48,6 @@ const Layout = async ({ children }: LayoutProps) => {
         <Link href="/dashboard" className="flex h-16 shrink-0 items-center">
           <Icons.LiveChat className="h-8 w-auto text-indigo-600" />
         </Link>
-        <p>Your chat</p>
         <nav className="flex flex-1 flex-col">
           <ul role="list" className="flex flex-1 flex-col gap-y-7">
             <li>

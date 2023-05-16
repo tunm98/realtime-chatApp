@@ -23,7 +23,20 @@ const SignOutButton: FC<SignOutButtonProps> = ({ ...props }) => {
   };
 
   return (
-    <Button {...props} variant="ghost" className="" onClick={handleSignOut}>
+    <Button
+      {...props}
+      variant="ghost"
+      onClick={async () => {
+        setIsSignOut(true);
+        try {
+          await signOut();
+        } catch (error) {
+          toast.error("There was a problem signing out");
+        } finally {
+          setIsSignOut(false);
+        }
+      }}
+    >
       {isSignOut ? (
         <Loader2 className="animate-spin h-4 w-4" />
       ) : (
