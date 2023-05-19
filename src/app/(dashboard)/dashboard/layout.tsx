@@ -8,6 +8,7 @@ import SignOutButton from "@/components/SignOutButton";
 import { fetchRedis } from "@/helpers/redis";
 import FriendRequestSidebar from "@/components/FriendRequestSidebar";
 import { getUserById } from "@/helpers/get-user-by-id";
+import SidebarChat from "@/components/SidebarChat";
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -36,11 +37,7 @@ const Layout = async ({ children }: LayoutProps) => {
       `user:${session.user.id}:incoming_friend_requests`
     )) as string[]
   )?.length;
-  const friendList = await getUserById(session.user.id);
-  console.log(
-    "🚀 ~ file: layout.tsx:40 ~ Layout ~ friendList:",
-    friendList.length
-  );
+  const friendList = (await getUserById(session.user.id)) as User[];
 
   return (
     <div className="flex p-[50px] h-screen">
@@ -48,8 +45,16 @@ const Layout = async ({ children }: LayoutProps) => {
         <Link href="/dashboard" className="flex h-16 shrink-0 items-center">
           <Icons.LiveChat className="h-8 w-auto text-indigo-600" />
         </Link>
+        {friendList.length > 0 && (
+          <div className="text-xs font-semibold leading-6 text-gray-400">
+            Your chats
+          </div>
+        )}
         <nav className="flex flex-1 flex-col">
           <ul role="list" className="flex flex-1 flex-col gap-y-7">
+            <li>
+              <SidebarChat userId={session.user.id} friendList={friendList} />
+            </li>
             <li>
               <div className="text-xs font-semibold leading-6 text-gray-400">
                 Overview
@@ -74,14 +79,15 @@ const Layout = async ({ children }: LayoutProps) => {
                     </li>
                   );
                 })}
+                <li>
+                  <FriendRequestSidebar
+                    sessionId={session.user.id}
+                    unseenRequests={unseenRequestNumber}
+                  />
+                </li>
               </ul>
             </li>
-            <li>
-              <FriendRequestSidebar
-                sessionId={session.user.id}
-                unseenRequests={unseenRequestNumber}
-              />
-            </li>
+
             <li className="-mx-6 mt-auto flex items-center">
               <div className="flex flex-1 items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900">
                 <div className="relative h-8 w-8 bg-gray-50">
