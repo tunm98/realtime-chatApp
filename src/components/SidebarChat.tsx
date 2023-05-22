@@ -54,9 +54,15 @@ const SidebarChat: FC<SidebarChatProps> = ({ friendList, userId }) => {
               <div className="flex items-center gap-4 font-bold">
                 {friend.name}
               </div>
-              {/* <div className="flex items-center gap-4 text-[12px] italic">
-                {lastMessage?.text}
-              </div> */}
+              {unseenMessages.length > 0 ? (
+                <div className="bg-indigo-600 font-medium text-xs text-white w-4 h-4 rounded-full flex justify-center items-center">
+                  {unseenMessages.map((msg, index) => (
+                    <p key={index}>
+                      {msg.senderId === friend.id ? msg.text : null}
+                    </p>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </li>
         );
