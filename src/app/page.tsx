@@ -1,4 +1,3 @@
-import { db } from "@/lib/db";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
 import { GetStaticProps, GetStaticPropsContext } from "next";
@@ -42,11 +41,11 @@ export default async function Home({ posts }: PageProps) {
         </Button>
       </Link>
 
-      <ul>
+      {/* <ul>
         {posts?.map((post) => (
           <li key={post.id}>{post?.title}</li>
         ))}
-      </ul>
+      </ul> */}
     </>
   );
 }
