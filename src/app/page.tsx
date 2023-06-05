@@ -20,14 +20,14 @@ import { GetStaticProps, GetStaticPropsContext } from "next";
 //   }
 // }
 
-export interface Post {
-  id: number;
-  title: string;
-}
-export interface PageProps {
-  posts: Post[];
-}
-export default async function Home({ posts }: PageProps) {
+// export interface Post {
+//   id: number;
+//   title: string;
+// }
+// export interface PageProps {
+//   posts: Post[];
+// }
+export default async function Home() {
   return (
     <>
       <Link href="/dashboard">
@@ -40,7 +40,6 @@ export default async function Home({ posts }: PageProps) {
           Go to Login
         </Button>
       </Link>
-
       {/* <ul>
         {posts?.map((post) => (
           <li key={post.id}>{post?.title}</li>
