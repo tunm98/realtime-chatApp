@@ -5,6 +5,12 @@ const nextConfig = {
   },
   images: {
     domains: ["lh3.googleusercontent.com", "res.cloudinary.com"],
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "movieapi.cyberlearn.vn",
+      },
+    ],
   },
 };
 

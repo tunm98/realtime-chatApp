@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { messageArrayValidator } from "@/lib/validations/message";
 import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
 interface PageProps {
   params: {
@@ -39,14 +40,14 @@ const page = async ({ params }: PageProps) => {
     }
   };
 
-  const [userId1, userId2] = chatId.split("_");
+  const [userId1, userId2] = chatId.split("--");
   if (userId1 !== user.id && userId2 !== user.id) notFound();
 
   const chatPartnerId = user.id === userId1 ? userId2 : userId1;
   const chatPartnerInfor = (await db.get(`users/${chatPartnerId}`)) as User;
   const chatMessages = await getChatMessages(chatId);
 
-  return <div>{params.chatId}</div>;
+  return <div className="ml-[20px]">{params.chatId}</div>;
 };
 
 export default page;
