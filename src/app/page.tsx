@@ -51,17 +51,17 @@ export default async function Home({ posts }: PageProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps<PageProps> = async () =>
-  // context: GetStaticPropsContext
-  {
-    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-    const posts = await res.json();
-    return {
-      props: {
-        posts: posts.map((post: any) => {
-          id: post.id;
-          title: post.title;
-        }),
-      },
-    };
-  };
+// export const getStaticProps: GetStaticProps<PageProps> = async () =>
+//   // context: GetStaticPropsContext
+//   {
+//     const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+//     const posts = await res.json();
+//     return {
+//       props: {
+//         posts: posts.map((post: any) => {
+//           id: post.id;
+//           title: post.title;
+//         }),
+//       },
+//     };
+//   };
