@@ -40,7 +40,7 @@ const Layout = async ({ children }: LayoutProps) => {
   const friendList = (await getUserById(session.user.id)) as User[];
 
   return (
-    <div className="flex p-[50px] h-screen">
+    <div className="flex px-[30px] h-screen">
       <div className="w-[300px] flex flex-col border-r-black border-r-[1px]">
         <Link href="/dashboard" className="flex h-16 shrink-0 items-center">
           <Icons.LiveChat className="h-8 w-auto text-indigo-600" />

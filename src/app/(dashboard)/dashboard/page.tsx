@@ -7,11 +7,11 @@ const Page = async ({}) => {
   const session = await getServerSession(authOptions);
   return (
     <div className="flex flex-col">
-      <Link href="/dashboard/add">
-        <Button className="mt-[20px] ml-[20px]" variant="default" size="lg">
-          Go to Addfr page
-        </Button>
-      </Link>
+      {/* <Link href="/">
+        <Button className="mt-[20px] ml-[20px]" variant="default" size="lg"> */}
+      Welcome to chat app!
+      {/* </Button>
+      </Link> */}
     </div>
   );
 };
