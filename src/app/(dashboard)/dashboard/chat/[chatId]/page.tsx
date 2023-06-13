@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Messages from "@/components/Messages";
+import ChatInput from "@/components/ChatInput";
 interface PageProps {
   params: {
     chatId: string;
@@ -90,7 +91,7 @@ const page = async ({ params }: PageProps) => {
         sessionId={session?.user?.id}
         initialMessages={chatMessages}
       />
-      {/* <ChatInput chatId={chatId} chatPartner={chatPartner} /> */}
+      <ChatInput chatId={chatId} chatPartner={chatPartnerInfor} />
     </div>
   );
 };
